@@ -4,8 +4,8 @@
 [ext_resource path="res://Juego/Niveles/Nivel.gd" type="Script" id=3]
 
 [node name="NivelTest" type="Node2D"]
-position = Vector2( 240.543, 179.962 )
+position = Vector2( -1.08972, -1.17059 )
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -69.2871, -107.616 )
+position = Vector2( 340.334, 239.446 )

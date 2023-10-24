@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Juego/naves/player/laser/canion.gd" type="Script" id=1]
 [ext_resource path="res://Juego/naves/player/laser/LaserPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TemporalAssets/kenney sounds/Audio/laserSmall_002.ogg" type="AudioStream" id=3]
 
 [node name="canion" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,6 +17,7 @@ position = Vector2( 0, -4.06893 )
 position = Vector2( 0.0936432, 3.65212 )
 
 [node name="DisparosSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 
 [node name="timerEnfriamiento" type="Timer" parent="."]
 wait_time = 0.8

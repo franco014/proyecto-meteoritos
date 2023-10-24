@@ -1,7 +1,23 @@
+#nivel.gd
+class_name Nivel
 extends Node2D
 
+##atributos Onready
+onready var contenedor_proyectiles:Node
+
+## metodos
 func _ready() -> void:
+	conectar_seniales()
+	crear_contenedores()
+
+## motodos customs
+func conectar_seniales() -> void:
 	Eventos.connect("disparo",self,"_on_disparo")
 
+func crear_contenedores() -> void:
+	contenedor_proyectiles =Node.new()
+	contenedor_proyectiles.name = "contenedorProyectiles"
+	add_child(contenedor_proyectiles)
+
 func _on_disparo(proyectil:proyectil) ->void:
-	add_child(proyectil)
+	contenedor_proyectiles.add_child(proyectil)
