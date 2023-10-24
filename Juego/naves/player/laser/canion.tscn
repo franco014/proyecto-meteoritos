@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Juego/naves/player/laser/canion.gd" type="Script" id=1]
+[ext_resource path="res://Juego/naves/player/laser/LaserPlayer.tscn" type="PackedScene" id=2]
+
+[node name="canion" type="Node2D"]
+script = ExtResource( 1 )
+proyectil = ExtResource( 2 )
+
+[node name="PuntoIzquierdo" type="Position2D" parent="."]
+position = Vector2( 0, -4.06893 )
+
+[node name="PuntoDerecho" type="Position2D" parent="."]
+position = Vector2( 0.0936432, 3.65212 )
+
+[node name="DisparosSFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="timerEnfriamiento" type="Timer" parent="."]
+wait_time = 0.8
+[connection signal="timeout" from="timerEnfriamiento" to="." method="_on_timerEnfriamiento_timeout"]
