@@ -49,7 +49,7 @@ func disparar() -> void:
 			velocidad_proyectil,
 			danio_proyectil
 			)
-	print("pew pew")
+		Eventos.emit_signal("disparo",new_proyectil)
 	
 
 

@@ -12,13 +12,12 @@ radius = 36.2898
 
 [node name="Player" type="RigidBody2D"]
 position = Vector2( 255, 67 )
+mass = 2.5
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 4.0
 script = ExtResource( 2 )
-potencia_motor = 10
-potencia_rotacion = 230
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 1.5708
@@ -29,12 +28,11 @@ position = Vector2( 0, -0.250847 )
 shape = SubResource( 2 )
 
 [node name="canion" parent="." instance=ExtResource( 3 )]
-position = Vector2( 3.05176e-05, 0.37458 )
 
 [node name="PuntoIzquierdo" parent="canion" index="0"]
-position = Vector2( 1.49829, -45.3238 )
+position = Vector2( 4.76221, -46.9288 )
 
 [node name="PuntoDerecho" parent="canion" index="1"]
-position = Vector2( 0.943878, 46.7218 )
+position = Vector2( 5.25269, 46.5119 )
 
 [editable path="canion"]

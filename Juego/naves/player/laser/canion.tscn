@@ -6,6 +6,8 @@
 [node name="canion" type="Node2D"]
 script = ExtResource( 1 )
 proyectil = ExtResource( 2 )
+cadencia_disparo = 0.3
+velocidad_proyectil = 1000.0
 
 [node name="PuntoIzquierdo" type="Position2D" parent="."]
 position = Vector2( 0, -4.06893 )

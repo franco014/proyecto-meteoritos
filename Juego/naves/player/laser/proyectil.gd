@@ -14,4 +14,4 @@ func crear(pos: Vector2, dir: float,vel: float,danio_p: int):
 	danio = danio_p
 
 func _physics_process(delta: float) -> void:
-	position = velocidad*delta
+	position += velocidad*delta

@@ -36,6 +36,10 @@ config/name="meteoritos"
 run/main_scene="res://Juego/Niveles/NivelTest.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Eventos="*res://Juego/autoloads/eventos.gd"
+
 [input]
 
 mover_adelante={
