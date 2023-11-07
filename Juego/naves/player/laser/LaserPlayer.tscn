@@ -14,12 +14,13 @@ script = ExtResource( 1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.176777, 0.176777 )
-rotation = 1.5708
-texture = ExtResource( 2 )
-
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -0.353554, -0.176778 )
 scale = Vector2( 1.91924, 0.451993 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 2, 0, 0, 1 )
+position = Vector2( 0.176777, 0.176777 )
+rotation = 1.5708
+texture = ExtResource( 2 )
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

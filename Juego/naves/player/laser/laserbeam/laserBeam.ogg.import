@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/laserBeam.ogg-0c5b0b6ff77bc01c087fbc09eb11c3f5.oggstr"
+
+[deps]
+
+source_file="res://Juego/naves/player/laser/laserbeam/laserBeam.ogg"
+dest_files=[ "res://.import/laserBeam.ogg-0c5b0b6ff77bc01c087fbc09eb11c3f5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/laserPrincipalPlayer.ogg-39bf1adafd474b14a6e2411a4ca13326.oggstr"
+
+[deps]
+
+source_file="res://Juego/naves/player/laser/laserPrincipalPlayer.ogg"
+dest_files=[ "res://.import/laserPrincipalPlayer.ogg-39bf1adafd474b14a6e2411a4ca13326.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
