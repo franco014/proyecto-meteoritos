@@ -5,6 +5,7 @@ extends RigidBody2D
 # atributos export
 export var potencia_motor:int = 20
 export var potencia_rotacion:int = 280
+export var estela_maxima = 150
 
 # atributos
 var empuje:Vector2 = Vector2.ZERO
@@ -13,6 +14,8 @@ var dir_rotacion:int = 0
 ## atributos Onready
 onready var canion:Canion = $canion
 onready var laser:RayoLaser = $LaserBeam2D
+onready var estela:Estela = $EstelaPositionInicio/Trail2D
+onready var motor_sfx:Motor = $motorSFX
 
 ##Metodos
 func _unhandled_input(event: InputEvent) -> void:
@@ -22,6 +25,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_released("disparo secundario"):
 		laser.set_is_casting(false)
+		
+	if event.is_action_pressed("mover_adelante"):
+		estela.set_max_point(estela_maxima)
+		motor_sfx.sonido_on()
+	elif event.is_action_pressed("mover_atras"):
+		estela.set_max_point(0)
+		motor_sfx.sonido_on()
+		
+	if (event.is_action_released("mover_adelante")
+		or event.is_action_released("mover_atras")):
+			motor_sfx.sonido_off()
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
