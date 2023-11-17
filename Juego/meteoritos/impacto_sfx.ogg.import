@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/impacto_sfx.ogg-7ff17c8f81dd50d6114c726ad40d709c.oggstr"
+
+[deps]
+
+source_file="res://Juego/meteoritos/impacto_sfx.ogg"
+dest_files=[ "res://.import/impacto_sfx.ogg-7ff17c8f81dd50d6114c726ad40d709c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

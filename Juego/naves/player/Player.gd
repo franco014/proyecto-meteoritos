@@ -24,6 +24,7 @@ onready var estela:Estela = $EstelaPositionInicio/Trail2D
 onready var motor_sfx:Motor = $motorSFX
 onready var colisionador:CollisionShape2D = $CollisionShape2D
 onready var sonidoa_danio:AudioStreamPlayer = $sonidoDanio
+onready var escudo:Escudo = $Escudo
 
 ##Metodos
 func _ready() -> void:
@@ -52,6 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_released("mover_adelante")
 		or event.is_action_released("mover_atras")):
 			motor_sfx.sonido_off()
+	
+	##control escudo
+	if event.is_action_pressed("escudo") and not escudo.get_esta_activado():
+		escudo.activar()
+
+
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
@@ -140,3 +147,9 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 
 
 
+
+
+func _on_Player_body_entered(body: Node) -> void:
+	if body is Meteorito:
+		body.destruir()
+		destruir()
