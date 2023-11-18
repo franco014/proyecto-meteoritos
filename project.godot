@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/laserbeam/LaserBeam2D.gd"
 }, {
+"base": "Node2D",
+"class": "SectorMeteoritos",
+"language": "GDScript",
+"path": "res://Juego/meteoritos/SectorMeteoritos.gd"
+}, {
 "base": "Area2D",
 "class": "proyectil",
 "language": "GDScript",
@@ -63,6 +68,7 @@ _global_script_class_icons={
 "Nivel": "",
 "Player": "",
 "RayoLaser": "",
+"SectorMeteoritos": "",
 "proyectil": ""
 }
 

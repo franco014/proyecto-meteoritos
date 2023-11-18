@@ -97,6 +97,9 @@ volume_db = -1.072
 pitch_scale = 1.64
 
 [node name="Escudo" parent="." instance=ExtResource( 8 )]
+
+[node name="CameraPlayer" type="Camera2D" parent="."]
+current = true
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
