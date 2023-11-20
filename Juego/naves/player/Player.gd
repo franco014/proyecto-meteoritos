@@ -10,6 +10,7 @@ enum ESTADO{SPAWN,VIVO,INVENCIBLE,MUERTO}
 export var potencia_motor:int = 20
 export var potencia_rotacion:int = 280
 export var estela_maxima = 150
+export var hitpoints: float = 15.0
 
 ## atributos
 var empuje:Vector2 = Vector2.ZERO
@@ -22,6 +23,8 @@ onready var laser:RayoLaser = $LaserBeam2D
 onready var estela:Estela = $EstelaPositionInicio/Trail2D
 onready var motor_sfx:Motor = $motorSFX
 onready var colisionador:CollisionShape2D = $CollisionShape2D
+onready var sonidoa_danio:AudioStreamPlayer = $sonidoDanio
+onready var escudo:Escudo = $Escudo
 
 ##Metodos
 func _ready() -> void:
@@ -50,6 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_released("mover_adelante")
 		or event.is_action_released("mover_atras")):
 			motor_sfx.sonido_off()
+	
+	##control escudo
+	if event.is_action_pressed("escudo") and not escudo.get_esta_activado():
+		escudo.activar()
+
+
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
@@ -82,8 +91,16 @@ func controlador_estados(nuevo_estado:int) -> void:
 			printerr("Error de estado")
 	estado_actual = nuevo_estado
 
+
 func destruir():
 	controlador_estados(ESTADO.MUERTO)
+
+func recibir_danio(danio: float) -> void:
+	hitpoints -= danio
+	sonidoa_danio.play()
+	if hitpoints <= 0.0:
+		destruir()
+
 
 func esta_input_activo() -> bool:
 	if estado_actual in [ESTADO.MUERTO,ESTADO.SPAWN]:
@@ -121,3 +138,14 @@ func player_input() -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":
 		controlador_estados(ESTADO.VIVO)
+
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	queue_free()
+
+
+
+
+func _on_Player_body_entered(body: Node) -> void:
+	if body is Meteorito:
+		body.destruir()
+		destruir()

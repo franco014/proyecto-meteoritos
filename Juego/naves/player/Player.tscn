@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Juego/naves/player/player_orange.png" type="Texture" id=1]
 [ext_resource path="res://Juego/naves/player/Player.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Juego/naves/player/laser/laserbeam/LaserBeam2D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Juego/naves/player/estela/Trail2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Juego/naves/player/Motor/motorSFX.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Juego/naves/player/laser/impacto.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Juego/naves/player/Escudo/Escudo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Juego/naves/player/CameraPlayer.gd" type="Script" id=9]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -35,6 +38,9 @@ collision_mask = 22
 mass = 2.5
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+contacts_reported = 2
+contact_monitor = true
+can_sleep = false
 linear_damp = 1.0
 angular_damp = 4.0
 script = ExtResource( 2 )
@@ -83,6 +89,23 @@ target_path = NodePath("..")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spawn"
 anims/spawn = SubResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="sonidoDanio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -1.072
+pitch_scale = 1.64
+
+[node name="Escudo" parent="." instance=ExtResource( 8 )]
+
+[node name="CameraPlayer" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 9 )
+
+[node name="TweenZoom" type="Tween" parent="CameraPlayer"]
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="canion"]

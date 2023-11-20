@@ -1,21 +1,48 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Juego/naves/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://default_env.tres" type="Environment" id=2]
 [ext_resource path="res://Juego/Niveles/Nivel.gd" type="Script" id=3]
 [ext_resource path="res://Juego/explosiones/Explosion.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Juego/naves/enemigos/EnemigoDummy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Juego/Peligros/SectorPeligro.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Juego/meteoritos/SectorMeteoritos.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Juego/meteoritos/Meteorito.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Juego/Niveles/fondos/fondo2.png" type="Texture" id=8]
+[ext_resource path="res://Juego/explosiones/ExplosionMeteorito.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Juego/Niveles/CamaraJuego.gd" type="Script" id=10]
 
 [node name="NivelTest" type="Node2D"]
 position = Vector2( -1.08972, -1.17059 )
 script = ExtResource( 3 )
 expolosion = ExtResource( 4 )
+meteorito = ExtResource( 7 )
+sector_meteoritos = ExtResource( 6 )
+explosion_meteorito = ExtResource( 9 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 340.334, 239.446 )
+position = Vector2( 413.884, 564.69 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
 
-[node name="EnemigoDummy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 927.581, 261.626 )
+[node name="fondo2" type="Sprite" parent="."]
+position = Vector2( 1420.44, 654.455 )
+scale = Vector2( 30.781, 11.277 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="TriggersLluviaMeteoritos" type="Node" parent="."]
+
+[node name="SectorPeligro" parent="TriggersLluviaMeteoritos" instance=ExtResource( 5 )]
+position = Vector2( 1278.45, 616.597 )
+tipo_peligro = "Meteoritos"
+numero_peligros = 3
+
+[node name="CameraNivel" type="Camera2D" parent="."]
+zoom = Vector2( 2, 2 )
+script = ExtResource( 10 )
+
+[node name="TweenZoom" type="Tween" parent="CameraNivel"]
+
+[node name="TweenCamara" type="Tween" parent="."]
+[connection signal="tween_completed" from="TweenCamara" to="." method="_on_TweenCamara_tween_completed"]
