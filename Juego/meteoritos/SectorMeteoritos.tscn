@@ -115,6 +115,7 @@ script = ExtResource( 2 )
 [node name="DetectorIzquierdo" type="Area2D" parent="DetectoresFueraZona"]
 position = Vector2( -1500, 0 )
 collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectoresFueraZona/DetectorIzquierdo"]
 rotation = 1.5708
@@ -123,6 +124,7 @@ shape = SubResource( 1 )
 [node name="DetectorDerecho" type="Area2D" parent="DetectoresFueraZona"]
 position = Vector2( 1500, 0 )
 collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DetectoresFueraZona/DetectorDerecho"]
 shape = SubResource( 2 )
@@ -130,6 +132,7 @@ shape = SubResource( 2 )
 [node name="DetectorSuperior" type="Area2D" parent="DetectoresFueraZona"]
 position = Vector2( 0, -1000 )
 collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="DetectoresFueraZona/DetectorSuperior"]
 position = Vector2( -0.102966, 0.0386658 )
@@ -138,6 +141,7 @@ shape = SubResource( 3 )
 [node name="DetectorInferior" type="Area2D" parent="DetectoresFueraZona"]
 position = Vector2( 0, 1000 )
 collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="DetectoresFueraZona/DetectorInferior"]
 shape = SubResource( 4 )
@@ -224,9 +228,6 @@ direccion = Vector2( 2, 0 )
 position = Vector2( -1214.09, 722.219 )
 direccion = Vector2( 2, -1 )
 
-[node name="MeteoritoSpawner5" parent="Spawner" instance=ExtResource( 1 )]
-position = Vector2( 609.471, 703.342 )
-
 [node name="MeteoritoSpawner6" parent="Spawner" instance=ExtResource( 1 )]
 position = Vector2( 600.995, 694.866 )
 direccion = Vector2( 0, -2 )
@@ -270,4 +271,8 @@ volume_db = -27.1092
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "advertencia"
 anims/advertencia = SubResource( 10 )
+[connection signal="body_entered" from="DetectoresFueraZona/DetectorIzquierdo" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DetectoresFueraZona/DetectorDerecho" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DetectoresFueraZona/DetectorSuperior" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DetectoresFueraZona/DetectorInferior" to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

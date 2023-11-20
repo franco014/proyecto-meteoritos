@@ -145,10 +145,6 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 
 
 
-
-
-
-
 func _on_Player_body_entered(body: Node) -> void:
 	if body is Meteorito:
 		body.destruir()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Juego/naves/player/player_orange.png" type="Texture" id=1]
 [ext_resource path="res://Juego/naves/player/Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Juego/naves/player/Motor/motorSFX.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Juego/naves/player/laser/impacto.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Juego/naves/player/Escudo/Escudo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Juego/naves/player/CameraPlayer.gd" type="Script" id=9]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -100,6 +101,9 @@ pitch_scale = 1.64
 
 [node name="CameraPlayer" type="Camera2D" parent="."]
 current = true
+script = ExtResource( 9 )
+
+[node name="TweenZoom" type="Tween" parent="CameraPlayer"]
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
