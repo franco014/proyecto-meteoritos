@@ -9,15 +9,45 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Camera2D",
+"class": "CamaraJuego",
+"language": "GDScript",
+"path": "res://Juego/Niveles/CamaraJuego.gd"
+}, {
+"base": "CamaraJuego",
+"class": "CameraPlayer",
+"language": "GDScript",
+"path": "res://Juego/naves/player/CameraPlayer.gd"
+}, {
 "base": "Node2D",
 "class": "Canion",
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/canion.gd"
 }, {
+"base": "Area2D",
+"class": "Escudo",
+"language": "GDScript",
+"path": "res://Juego/naves/player/Escudo/Escudo.gd"
+}, {
+"base": "Node2D",
+"class": "EstacionRecarga",
+"language": "GDScript",
+"path": "res://Juego/naves/Estaciones/EstacionRecarga.gd"
+}, {
 "base": "Line2D",
 "class": "Estela",
 "language": "GDScript",
 "path": "res://Juego/naves/player/estela/Trail2D.gd"
+}, {
+"base": "Node2D",
+"class": "ExplosionMeteorito",
+"language": "GDScript",
+"path": "res://Juego/explosiones/ExplosionMeteorito.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Meteorito",
+"language": "GDScript",
+"path": "res://Juego/meteoritos/Meteorito.gd"
 }, {
 "base": "AudioStreamPlayer2D",
 "class": "Motor",
@@ -39,18 +69,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/laserbeam/LaserBeam2D.gd"
 }, {
+"base": "Node2D",
+"class": "SectorMeteoritos",
+"language": "GDScript",
+"path": "res://Juego/meteoritos/SectorMeteoritos.gd"
+}, {
 "base": "Area2D",
 "class": "proyectil",
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/proyectil.gd"
 } ]
 _global_script_class_icons={
+"CamaraJuego": "",
+"CameraPlayer": "",
 "Canion": "",
+"Escudo": "",
+"EstacionRecarga": "",
 "Estela": "",
+"ExplosionMeteorito": "",
+"Meteorito": "",
 "Motor": "",
 "Nivel": "",
 "Player": "",
 "RayoLaser": "",
+"SectorMeteoritos": "",
 "proyectil": ""
 }
 
@@ -110,6 +152,31 @@ rotar_antihorario={
 "disparo secundario"={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+escudo={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
++zoom={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+-zoom={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+recargarEscudo={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+RecargarLaser={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 

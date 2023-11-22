@@ -1,21 +1,129 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Juego/naves/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://default_env.tres" type="Environment" id=2]
 [ext_resource path="res://Juego/Niveles/Nivel.gd" type="Script" id=3]
 [ext_resource path="res://Juego/explosiones/Explosion.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Juego/naves/enemigos/EnemigoDummy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Juego/Peligros/SectorPeligro.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Juego/meteoritos/SectorMeteoritos.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Juego/meteoritos/Meteorito.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Juego/Niveles/fondos/fondo2.png" type="Texture" id=8]
+[ext_resource path="res://Juego/explosiones/ExplosionMeteorito.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Juego/Niveles/CamaraJuego.gd" type="Script" id=10]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=11]
 
 [node name="NivelTest" type="Node2D"]
 position = Vector2( -1.08972, -1.17059 )
 script = ExtResource( 3 )
 expolosion = ExtResource( 4 )
+meteorito = ExtResource( 7 )
+sector_meteoritos = ExtResource( 6 )
+explosion_meteorito = ExtResource( 9 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 340.334, 239.446 )
+position = Vector2( 422.956, 430.045 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
 
-[node name="EnemigoDummy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 927.581, 261.626 )
+[node name="TriggersLluviaMeteoritos" type="Node" parent="."]
+
+[node name="SectorPeligro" parent="TriggersLluviaMeteoritos" instance=ExtResource( 5 )]
+position = Vector2( 1278.45, 616.597 )
+tipo_peligro = "Meteoritos"
+numero_peligros = 3
+
+[node name="EstacionesRecargas" type="Node" parent="."]
+
+[node name="EstacionRecarga" parent="EstacionesRecargas" instance=ExtResource( 11 )]
+position = Vector2( 87.4164, 303.957 )
+
+[node name="CameraNivel" type="Camera2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="TweenZoom" type="Tween" parent="CameraNivel"]
+
+[node name="TweenCamara" type="Tween" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 256, 256 )
+
+[node name="fondo2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1015.88, -0.297363 )
+z_index = -100
+texture = ExtResource( 8 )
+centered = false
+
+[node name="fondo3" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 133.854, 630.965 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo10" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 133.854, 1138.87 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo4" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1642.48, 132.305 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo14" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 2144.38, 132.305 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo15" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 2149.72, 628.865 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo16" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 2149.72, 1136.1 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo5" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 642.518, 124.155 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo7" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 640.14, 630.758 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo11" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 640.14, 1138.66 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo8" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1144.36, 628.379 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo12" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1151.09, 1139.64 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo13" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1638.81, 1136.28 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo9" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1639.07, 637.893 )
+z_index = -100
+texture = ExtResource( 8 )
+
+[node name="fondo6" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 131.869, 128.394 )
+z_index = -100
+texture = ExtResource( 8 )
+[connection signal="tween_completed" from="TweenCamara" to="." method="_on_TweenCamara_tween_completed"]
