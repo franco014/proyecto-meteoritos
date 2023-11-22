@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Juego/naves/NaveBase.gd" type="Script" id=2]
+[ext_resource path="res://Juego/naves/player/laser/canion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/naves/player/laser/impacto.ogg" type="AudioStream" id=7]
+
+[node name="NaveBase" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+mass = 2.5
+gravity_scale = 0.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1.41422 )
+scale = Vector2( 1e-05, 1e-05 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.88776, 0.693031 )
+
+[node name="canion" parent="." instance=ExtResource( 3 )]
+
+[node name="sonidoDanio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -1.072
+pitch_scale = 1.64
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
