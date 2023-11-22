@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/canion.gd"
 }, {
+"base": "NaveBase",
+"class": "EnemigoBase",
+"language": "GDScript",
+"path": "res://Juego/naves/enemigos/EnemigoBase.gd"
+}, {
 "base": "Area2D",
 "class": "Escudo",
 "language": "GDScript",
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "CamaraJuego": "",
 "CameraPlayer": "",
 "Canion": "",
+"EnemigoBase": "",
 "Escudo": "",
 "EstacionRecarga": "",
 "Estela": "",

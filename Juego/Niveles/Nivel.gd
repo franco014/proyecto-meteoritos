@@ -14,7 +14,7 @@ onready var contenedor_proyectiles:Node
 onready var contenedor_meteoritos:Node
 onready var contenedor_sector_meteoritos:Node
 onready var camara_nivel:Camera2D = $CameraNivel
-onready var camara_jugador:Camera2D = $Player/CameraPlayer
+onready var camara_jugador:Camera2D = $NavePlayer/CameraPlayer
 
 ##atributos 
 var meteoritos_totales:int = 0 
