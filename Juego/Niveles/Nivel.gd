@@ -8,6 +8,7 @@ export var meteorito:PackedScene = null
 export var sector_meteoritos: PackedScene = null
 export var tiempo_transicion_camara: int = 1
 export var explosion_meteorito:PackedScene = null
+export var enemigo_interceptor:PackedScene = null
 
 ##atributos Onready
 onready var contenedor_proyectiles:Node
@@ -15,14 +16,17 @@ onready var contenedor_meteoritos:Node
 onready var contenedor_sector_meteoritos:Node
 onready var camara_nivel:Camera2D = $CameraNivel
 onready var camara_jugador:Camera2D = $NavePlayer/CameraPlayer
+onready var contenedor_enemigos:Node
 
 ##atributos 
 var meteoritos_totales:int = 0 
+var player:Player = null
 
 ## metodos
 func _ready() -> void:
 	conectar_seniales()
 	crear_contenedores()
+	player = DatosJuego.get_player_actual()
 
 ## motodos customs
 func conectar_seniales() -> void:
@@ -44,13 +48,19 @@ func crear_contenedores() -> void:
 	contenedor_sector_meteoritos = Node.new()
 	contenedor_sector_meteoritos.name = "contenedorSectorMeteoritos"
 	add_child(contenedor_sector_meteoritos)
+	
+	contenedor_enemigos = Node.new()
+	contenedor_enemigos.name = "contenedoEnemigos"
+	add_child(contenedor_enemigos)
+
+
 
 func _on_nave_en_sector_peligro(centro_cam:Vector2,tipo_peligro:String,num_peligros:int) -> void:
 	if tipo_peligro == "Meteoritos":
 		crear_sector_meteoritos(centro_cam,num_peligros)
 		
 	elif tipo_peligro =="Enemigo":
-		pass
+		crear_sector_enemigos(num_peligros)
 	
 
 func crear_sector_meteoritos(centro_camara:Vector2,numero_peligros:int) -> void:
@@ -66,8 +76,16 @@ func crear_sector_meteoritos(centro_camara:Vector2,numero_peligros:int) -> void:
 		camara_nivel.global_position,
 		camara_nivel,
 		tiempo_transicion_camara
-	)
-	
+		)
+
+func crear_sector_enemigos(num_enemigos:int) -> void:
+	for _i in range(num_enemigos):
+		var new_interceptor:EnemigoInterceptor = enemigo_interceptor.instance()
+		var spawn_pos:Vector2 = crear_posicion_aleatoria(10000.0,800.0)
+		new_interceptor.global_position = player.global_position + spawn_pos
+		contenedor_enemigos.add_child(new_interceptor)
+
+
 func controlar_meteoritos_restantes() ->void:
 	meteoritos_totales -= 1
 	if meteoritos_totales == 0 :
