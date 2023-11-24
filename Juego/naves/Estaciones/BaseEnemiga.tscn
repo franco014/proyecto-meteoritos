@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga7.png" type="Texture" id=1]
 [ext_resource path="res://Juego/naves/Estaciones/estacionEnemiga1.png" type="Texture" id=2]
@@ -15,22 +15,25 @@
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga10.png" type="Texture" id=13]
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga9.png" type="Texture" id=14]
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga8.png" type="Texture" id=15]
+[ext_resource path="res://Juego/naves/Estaciones/puntosSpawn.gd" type="Script" id=16]
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 58.4149
-height = 208.577
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 26.8631
+height = 247.336
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 138, 21.9994 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6.21668, 35.8527 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 32.0768
+height = 32.8188
 
-[sub_resource type="Animation" id=2]
-resource_name = "rotacion_antihorario"
+[sub_resource type="Animation" id=5]
+
+[sub_resource type="Animation" id=6]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -45,8 +48,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "rotacion_horario"
+[sub_resource type="Animation" id=7]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -62,7 +64,6 @@ tracks/0/keys = {
 }
 
 [node name="BaseEnemiga" type="Node2D"]
-rotation = -6.28319
 z_index = 400
 script = ExtResource( 3 )
 
@@ -136,26 +137,50 @@ collision_mask = 9
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaColision"]
-position = Vector2( -1.41447, 57.7035 )
-shape = SubResource( 4 )
+position = Vector2( 0.0838754, 59.2018 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="AreaColision"]
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="AreaColision"]
 position = Vector2( 0.000552091, -123.61 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( -1.88743, -66.0712 )
+rotation = 1.5708
+shape = SubResource( 4 )
 
 [node name="AreaDeAtraccion" parent="." instance=ExtResource( 12 )]
 modulate = Color( 1, 1, 1, 0 )
+gravity = 1024.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 1 )
-anims/rotacion_antihorario = SubResource( 2 )
-anims/rotacion_horario = SubResource( 3 )
+anims/default = SubResource( 5 )
+anims/rotacion_antihorario = SubResource( 6 )
+anims/rotacion_horario = SubResource( 7 )
 
 [node name="ImpactosSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="puntosSpawn" type="Node2D" parent="."]
+script = ExtResource( 16 )
+
+[node name="Norte" type="Position2D" parent="puntosSpawn"]
+position = Vector2( 0, -250 )
+
+[node name="Sur" type="Position2D" parent="puntosSpawn"]
+position = Vector2( 0, 300 )
+
+[node name="Este" type="Position2D" parent="puntosSpawn"]
+position = Vector2( 250, 0 )
+
+[node name="Oeste" type="Position2D" parent="puntosSpawn"]
+position = Vector2( -250, 0 )
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+
+[editable path="AreaDeAtraccion"]

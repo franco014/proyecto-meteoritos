@@ -36,6 +36,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("nave_en_sector_peligro",self,"_on_nave_en_sector_peligro")
 	Eventos.connect("meteorito_destruido",self,"_on_meteorito_destruido")
 	Eventos.connect("base_destruida",self,"_on_base_destruida")
+	Eventos.connect("spawn_orbital",self,"_on_spawn_orbital")
 	
 
 func crear_contenedores() -> void:
@@ -181,6 +182,9 @@ func _on_spawn_meteoritos(pos_spawn: Vector2,dir_meteorito:Vector2, tamanio: flo
 		tamanio
 	)
 	contenedor_meteoritos.add_child(new_meteorito)
+
+func _on_spawn_orbital(enemigo: EnemigoOrbital) -> void:
+	contenedor_enemigos.add_child(enemigo)
 
 func _on_TweenCamara_tween_completed(object: Object, key: NodePath) -> void:
 	if object.name == "CameraPlayer":
