@@ -49,12 +49,13 @@ func _on_AreaColision_body_entered(body: Node) -> void:
 
 func _on_AreaDeRecarga_body_entered(body: Node) -> void:
 	if body is Player:
+		player_en_zona = true
 		nave_player = body
 	
-	body.set_gravity_scale(0.1)
-	player_en_zona = true
+	
+	
 
 
 func _on_AreaDeRecarga_body_exited(body: Node) -> void:
-	body.set_gravity_scale(0.0)
-	player_en_zona = false
+	if body is Player:
+		player_en_zona = false

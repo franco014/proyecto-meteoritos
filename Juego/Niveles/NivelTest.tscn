@@ -8,18 +8,19 @@
 [ext_resource path="res://Juego/meteoritos/SectorMeteoritos.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Juego/meteoritos/Meteorito.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Juego/Niveles/fondos/fondo2.png" type="Texture" id=8]
-[ext_resource path="res://Juego/explosiones/ExplosionMeteorito.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Juego/Niveles/CamaraJuego.gd" type="Script" id=10]
 [ext_resource path="res://Juego/naves/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Juego/naves/enemigos/EnemigoDummy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Juego/naves/enemigos/EnemigoInterceptor.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Juego/naves/Estaciones/BaseEnemiga.tscn" type="PackedScene" id=13]
 
 [node name="NivelTest" type="Node2D"]
 position = Vector2( -1.08972, -1.17059 )
 script = ExtResource( 3 )
-expolosion = ExtResource( 4 )
+explosion = ExtResource( 4 )
 meteorito = ExtResource( 7 )
 sector_meteoritos = ExtResource( 6 )
-explosion_meteorito = ExtResource( 9 )
+explosion_meteorito = ExtResource( 4 )
+enemigo_interceptor = ExtResource( 12 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
@@ -41,7 +42,13 @@ numero_peligros = 3
 [node name="EstacionesRecargas" type="Node" parent="."]
 
 [node name="EstacionRecarga" parent="EstacionesRecargas" instance=ExtResource( 11 )]
-position = Vector2( -766.934, -267.853 )
+position = Vector2( -417.121, 821.949 )
+
+[node name="basesEnemigas" type="Node" parent="."]
+
+[node name="BaseEnemiga" parent="basesEnemigas" instance=ExtResource( 13 )]
+position = Vector2( 676.145, -79.0826 )
+rotation = -4.46638e-06
 
 [node name="CameraNivel" type="Camera2D" parent="."]
 script = ExtResource( 10 )
@@ -136,7 +143,4 @@ texture = ExtResource( 8 )
 position = Vector2( 536.542, 304.781 )
 potencia_motor = 50
 potencia_rotacion = 100
-
-[node name="EnemigoDummy" parent="." instance=ExtResource( 13 )]
-position = Vector2( 2251.46, -231.117 )
 [connection signal="tween_completed" from="TweenCamara" to="." method="_on_TweenCamara_tween_completed"]
