@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ActivadoReleMasa.ogg-83e191d0c87c2ab85f194c0a8acd3f8a.oggstr"
+
+[deps]
+
+source_file="res://Juego/naves/Estaciones/rele/ActivadoReleMasa.ogg"
+dest_files=[ "res://.import/ActivadoReleMasa.ogg-83e191d0c87c2ab85f194c0a8acd3f8a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

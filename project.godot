@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BaseEnemiga",
+"language": "GDScript",
+"path": "res://Juego/naves/Estaciones/BaseEnemiga.gd"
+}, {
 "base": "Camera2D",
 "class": "CamaraJuego",
 "language": "GDScript",
@@ -24,12 +29,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/canion.gd"
 }, {
+"base": "NaveBase",
+"class": "EnemigoBase",
+"language": "GDScript",
+"path": "res://Juego/naves/enemigos/EnemigoBase.gd"
+}, {
+"base": "EnemigoBase",
+"class": "EnemigoInterceptor",
+"language": "GDScript",
+"path": "res://Juego/naves/enemigos/EnemigoInterceptor.gd"
+}, {
+"base": "EnemigoBase",
+"class": "EnemigoOrbital",
+"language": "GDScript",
+"path": "res://Juego/naves/enemigos/EnemigoOrbital.gd"
+}, {
 "base": "Area2D",
 "class": "Escudo",
 "language": "GDScript",
 "path": "res://Juego/naves/player/Escudo/Escudo.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "EstacionRecarga",
 "language": "GDScript",
 "path": "res://Juego/naves/Estaciones/EstacionRecarga.gd"
@@ -54,20 +74,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/Motor/motorSFX.gd"
 }, {
+"base": "RigidBody2D",
+"class": "NaveBase",
+"language": "GDScript",
+"path": "res://Juego/naves/NaveBase.gd"
+}, {
 "base": "Node2D",
 "class": "Nivel",
 "language": "GDScript",
 "path": "res://Juego/Niveles/Nivel.gd"
 }, {
-"base": "RigidBody2D",
+"base": "NaveBase",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Juego/naves/player/Player.gd"
+"path": "res://Juego/naves/player/NavePlayer.gd"
 }, {
 "base": "RayCast2D",
 "class": "RayoLaser",
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/laserbeam/LaserBeam2D.gd"
+}, {
+"base": "Node2D",
+"class": "ReleMasa",
+"language": "GDScript",
+"path": "res://Juego/naves/Estaciones/rele/ReleMasa.gd"
 }, {
 "base": "Node2D",
 "class": "SectorMeteoritos",
@@ -80,18 +110,24 @@ _global_script_classes=[ {
 "path": "res://Juego/naves/player/laser/proyectil.gd"
 } ]
 _global_script_class_icons={
+"BaseEnemiga": "",
 "CamaraJuego": "",
 "CameraPlayer": "",
 "Canion": "",
+"EnemigoBase": "",
+"EnemigoInterceptor": "",
+"EnemigoOrbital": "",
 "Escudo": "",
 "EstacionRecarga": "",
 "Estela": "",
 "ExplosionMeteorito": "",
 "Meteorito": "",
 "Motor": "",
+"NaveBase": "",
 "Nivel": "",
 "Player": "",
 "RayoLaser": "",
+"ReleMasa": "",
 "SectorMeteoritos": "",
 "proyectil": ""
 }
@@ -105,6 +141,7 @@ config/icon="res://Juego/naves/player/player_orange.png"
 [autoload]
 
 Eventos="*res://Juego/autoloads/eventos.gd"
+DatosJuego="*res://Juego/autoloads/DatosJuego.gd"
 
 [display]
 
@@ -192,6 +229,7 @@ RecargarLaser={
 2d_physics/layer_4="proyectil_player"
 2d_render/layer_5="proyectil_enemigo"
 2d_physics/layer_5="proyectil_enemigo"
+2d_physics/layer_6="base_enemiga"
 
 [rendering]
 

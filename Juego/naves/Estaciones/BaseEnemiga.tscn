@@ -1,0 +1,199 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga7.png" type="Texture" id=1]
+[ext_resource path="res://Juego/naves/Estaciones/estacionEnemiga1.png" type="Texture" id=2]
+[ext_resource path="res://Juego/naves/Estaciones/BaseEnemiga.gd" type="Script" id=3]
+[ext_resource path="res://Juego/naves/player/laser/impacto.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Juego/naves/Estaciones/AreaColision.gd" type="Script" id=5]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga3.png" type="Texture" id=6]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga11.png" type="Texture" id=7]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga5.png" type="Texture" id=8]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga2.png" type="Texture" id=9]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga6.png" type="Texture" id=10]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga4.png" type="Texture" id=11]
+[ext_resource path="res://Juego/naves/Estaciones/AreaDeAtraccion.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga10.png" type="Texture" id=13]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga9.png" type="Texture" id=14]
+[ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga8.png" type="Texture" id=15]
+[ext_resource path="res://Juego/naves/Estaciones/puntosSpawn.gd" type="Script" id=16]
+[ext_resource path="res://Juego/naves/Estaciones/baseEnemiga/RutaEnemigo.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Juego/naves/enemigos/EnemigoOrbital.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Juego/naves/Estaciones/baseEnemiga/RutaEnemigo2.tscn" type="PackedScene" id=19]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 26.8631
+height = 247.336
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 138, 21.9994 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6.21668, 35.8527 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 32.0768
+height = 32.8188
+
+[sub_resource type="Animation" id=5]
+
+[sub_resource type="Animation" id=6]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="BaseEnemiga" type="Node2D"]
+rotation = -6.28319
+z_index = 400
+script = ExtResource( 3 )
+orbital = ExtResource( 18 )
+rutas = [ ExtResource( 17 ), ExtResource( 19 ) ]
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite1" type="Sprite" parent="Sprites"]
+position = Vector2( -79.9584, -0.746475 )
+texture = ExtResource( 6 )
+
+[node name="Sprite2" type="Sprite" parent="Sprites"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 9 )
+
+[node name="Sprite3" type="Sprite" parent="Sprites"]
+position = Vector2( 80, 0 )
+rotation = 3.14159
+texture = ExtResource( 6 )
+
+[node name="Sprite4" type="Sprite" parent="Sprites"]
+position = Vector2( 118.876, 0.37458 )
+rotation = -3.14159
+texture = ExtResource( 11 )
+
+[node name="Sprite5" type="Sprite" parent="Sprites"]
+texture = ExtResource( 2 )
+
+[node name="Sprite6" type="Sprite" parent="Sprites"]
+position = Vector2( -0.151321, 37.2634 )
+texture = ExtResource( 8 )
+
+[node name="Sprite7" type="Sprite" parent="Sprites"]
+position = Vector2( 0.218635, 166.797 )
+rotation = 1.5708
+texture = ExtResource( 10 )
+
+[node name="Sprite8" type="Sprite" parent="Sprites"]
+position = Vector2( 0, -128 )
+scale = Vector2( 1.14865, 0.963963 )
+texture = ExtResource( 1 )
+
+[node name="Sprite9" type="Sprite" parent="Sprites"]
+position = Vector2( 42.7692, 75.2419 )
+rotation = 1.5708
+texture = ExtResource( 15 )
+
+[node name="Sprite10" type="Sprite" parent="Sprites"]
+position = Vector2( -43.3065, 74.7832 )
+rotation = -1.5708
+texture = ExtResource( 15 )
+
+[node name="Sprite11" type="Sprite" parent="Sprites"]
+position = Vector2( 0, -72 )
+texture = ExtResource( 14 )
+
+[node name="Sprite12" type="Sprite" parent="Sprites"]
+position = Vector2( -0.68988, 75.1203 )
+texture = ExtResource( 13 )
+
+[node name="Sprite13" type="Sprite" parent="Sprites"]
+position = Vector2( 0.129796, 109.51 )
+rotation = 1.5708
+texture = ExtResource( 7 )
+
+[node name="Sprite14" type="Sprite" parent="Sprites"]
+position = Vector2( -118.502, -0.749153 )
+texture = ExtResource( 11 )
+
+[node name="AreaColision" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 9
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( 0.0838754, 59.2018 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AreaColision"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( 0.000552091, -123.61 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( -1.88743, -66.0712 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="AreaDeAtraccion" parent="." instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0 )
+gravity = 1024.0
+
+[node name="Sprite" parent="AreaDeAtraccion" index="1"]
+position = Vector2( -17.759, -11.628 )
+rotation = -0.244346
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 5 )
+anims/rotacion_antihorario = SubResource( 6 )
+anims/rotacion_horario = SubResource( 7 )
+
+[node name="ImpactosSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="puntosSpawn" type="Node2D" parent="."]
+script = ExtResource( 16 )
+
+[node name="Norte" type="Position2D" parent="puntosSpawn"]
+position = Vector2( 0, -250 )
+
+[node name="Sur" type="Position2D" parent="puntosSpawn"]
+position = Vector2( 0, 300 )
+
+[node name="Este" type="Position2D" parent="puntosSpawn"]
+position = Vector2( 250, 0 )
+
+[node name="Oeste" type="Position2D" parent="puntosSpawn"]
+position = Vector2( -250, 0 )
+
+[node name="TimerSpawnerEnemigos" type="Timer" parent="."]
+[connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="timeout" from="TimerSpawnerEnemigos" to="." method="_on_TimerSpawnerEnemigos_timeout"]
+
+[editable path="AreaDeAtraccion"]

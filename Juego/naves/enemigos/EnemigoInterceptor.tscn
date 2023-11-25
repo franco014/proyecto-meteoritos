@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Juego/naves/NaveBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/naves/enemigos/EnemigoInterceptor.gd" type="Script" id=2]
+[ext_resource path="res://TemporalAssets/kenney_space-shooter-redux/PNG/Enemies/enemyGreen3.png" type="Texture" id=3]
+[ext_resource path="res://Juego/naves/enemigos/LaserEnemigos.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 50.6989
+
+[sub_resource type="Animation" id=3]
+resource_name = "default"
+
+[sub_resource type="Animation" id=4]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 0.501961 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 529.879
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 673.404
+
+[node name="EnemigoInterceptor" instance=ExtResource( 1 )]
+collision_layer = 2
+collision_mask = 13
+physics_material_override = SubResource( 1 )
+contacts_reported = 2
+contact_monitor = true
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+rotation = -1.5708
+scale = Vector2( 1, 1 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 6.4344, -2.07324 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+autoplay = "spawn"
+anims/default = SubResource( 3 )
+anims/spawn = SubResource( 4 )
+
+[node name="AreaDisparo" type="Area2D" parent="." index="3"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDisparo" index="0"]
+shape = SubResource( 5 )
+
+[node name="AreaDeteccion" type="Area2D" parent="." index="4"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" index="0"]
+shape = SubResource( 6 )
+
+[node name="canion" parent="." index="5"]
+proyectil = ExtResource( 4 )
+cadencia_disparo = 1.3
+
+[node name="PuntoIzquierdo" parent="canion" index="0"]
+position = Vector2( 35.1593, -34.7448 )
+
+[node name="PuntoDerecho" parent="canion" index="1"]
+position = Vector2( 37.8486, 33.1482 )
+[connection signal="body_entered" from="AreaDisparo" to="." method="_on_AreaDisparo_body_entered"]
+[connection signal="body_exited" from="AreaDisparo" to="." method="_on_AreaDisparo_body_exited"]
+[connection signal="body_entered" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_entered"]
+[connection signal="body_exited" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_exited"]
+
+[editable path="canion"]
