@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Juego/naves/player/NavePlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://default_env.tres" type="Environment" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Juego/naves/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Juego/naves/enemigos/EnemigoInterceptor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Juego/naves/Estaciones/BaseEnemiga.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Juego/naves/enemigos/EnemigoOrbital.tscn" type="PackedScene" id=14]
 
 [node name="NivelTest" type="Node2D"]
 position = Vector2( -1.08972, -1.17059 )
@@ -49,14 +48,12 @@ position = Vector2( -417.121, 821.949 )
 [node name="basesEnemigas" type="Node" parent="."]
 
 [node name="BaseEnemiga" parent="basesEnemigas" instance=ExtResource( 13 )]
-position = Vector2( -908.812, -155.364 )
+position = Vector2( -876.776, -780.069 )
 rotation = -4.46638e-06
-orbital = ExtResource( 14 )
 
 [node name="BaseEnemiga2" parent="basesEnemigas" instance=ExtResource( 13 )]
 position = Vector2( 635.188, -867.364 )
 rotation = -4.46638e-06
-orbital = ExtResource( 14 )
 
 [node name="CameraNivel" type="Camera2D" parent="."]
 script = ExtResource( 10 )

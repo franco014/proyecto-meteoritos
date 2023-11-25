@@ -5,15 +5,20 @@ extends Node2D
 ##atributos export 
 export var hitpoints: float = 30.0
 export var orbital:PackedScene = null
+export var numero_orbitales:int = 10 
+export var intervalo_spawn:float = 0.8
 
 ##atributos onready 
 onready var impacto_sfx: AudioStreamPlayer2D = $ImpactosSFX
+onready var timer_spawner:Timer = $TimerSpawnerEnemigos
 
 ##atributos
 var esta_destruida:bool = false
+var posicion_spawn:Vector2 = Vector2.ZERO
 
 ##metodos
 func _ready() -> void:
+	timer_spawner.wait_time = intervalo_spawn
 	$AnimationPlayer.play(elegir_animacion_aleatoria())
 
 func _process(delta: float) -> void:
@@ -56,12 +61,14 @@ func destruir() -> void:
 	queue_free()
 
 func spawnear_orbital() -> void:
-	var pos_spawn:Vector2 = deteccion_cuadrante()
+	numero_orbitales -= 1
+	$RutaEnemigo.global_position = global_position
 	
 	var new_orbital:EnemigoOrbital = orbital.instance()
 	new_orbital.crear(
-		global_position + pos_spawn,
-		self
+		global_position + posicion_spawn,
+		self,
+		$RutaEnemigo
 	)
 	Eventos.emit_signal("spawn_orbital",new_orbital)
 
@@ -76,17 +83,21 @@ func deteccion_cuadrante() -> Vector2:
 	
 	if abs(angulo_player) <= 45.0:
 		#player entra por la derecha
+		$RutaEnemigo.rotation_degrees = 180.0
 		return$puntosSpawn/Este.position
 		#player entra por la izquierda
 	elif abs(angulo_player) > 135.0 and abs(angulo_player) <= 135.0:
+		$RutaEnemigo.rotation_degrees = 0.0
 		return $puntosSpawn/Oeste.position
 		#player entra por arriba o por abajo 
 	elif abs(angulo_player) >  45.0 and abs(angulo_player) <= 135.0:
 		if sign(angulo_player) > 0:
 			#player entra por abajo
+			$RutaEnemigo.rotation_degrees = 270.0
 			return $puntosSpawn/Sur.position
 		else:
 			#player entra por arriba
+			$RutaEnemigo.rotation_degrees = 90.0
 			return $puntosSpawn/Norte.position
 			
 	return $puntosSpawn/Norte.position
@@ -107,4 +118,13 @@ func _on_AreaColision_body_entered(body: Node) -> void:
 
 func _on_VisibilityNotifier2D_screen_entered() -> void:
 	$VisibilityNotifier2D.queue_free()
+	posicion_spawn = deteccion_cuadrante()
+	spawnear_orbital()
+	timer_spawner.start()
+
+
+func _on_TimerSpawnerEnemigos_timeout() -> void:
+	if numero_orbitales == 0:
+		timer_spawner.stop()
+		return
 	spawnear_orbital()

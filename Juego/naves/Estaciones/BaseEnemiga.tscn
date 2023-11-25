@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga7.png" type="Texture" id=1]
 [ext_resource path="res://Juego/naves/Estaciones/estacionEnemiga1.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga9.png" type="Texture" id=14]
 [ext_resource path="res://Juego/naves/Estaciones/EstacionEnemiga8.png" type="Texture" id=15]
 [ext_resource path="res://Juego/naves/Estaciones/puntosSpawn.gd" type="Script" id=16]
+[ext_resource path="res://Juego/naves/Estaciones/RutaEnemigo.gd" type="Script" id=17]
+[ext_resource path="res://Juego/naves/enemigos/EnemigoOrbital.tscn" type="PackedScene" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.8631
@@ -63,9 +65,16 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -171.233, -1.83739, 0, 0, 0, 0, -157.006, -43.5111, 0, 0, 0, 0, -79.4058, -85.1845, 0, 0, 0, 0, -74.2322, -149.481, 0, 0, 0, 0, -21.2055, -160.197, 0, 0, 0, 0, 13.7145, -162.578, 0, 0, 0, 0, 105.541, -114.951, 0, 0, 0, 0, 136.581, -49.4633, 0, 0, 0, 0, 168.914, -19.6962, 0, 0, 0, 0, 168.914, 12.4521, 0, 0, 0, 0, 122.353, 75.5579, 0, 0, 0, 0, 99.0731, 125.566, 0, 0, 0, 0, 61.5662, 182.719, 0, 0, 0, 0, 2.07287, 192.244, 0, 0, 0, 0, -45.7803, 164.858, 0, 0, 0, 0, -92.3404, 169.621, 0, 0, 0, 0, -84.5801, 108.896, 0, 0, 0, 0, -128.553, 104.133, 0, 0, 0, 0, -120.793, 39.8366, 0, 0, 0, 0, -167.353, -3.02805 )
+}
+
 [node name="BaseEnemiga" type="Node2D"]
+rotation = -6.28319
 z_index = 400
 script = ExtResource( 3 )
+orbital = ExtResource( 18 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -156,6 +165,10 @@ shape = SubResource( 4 )
 modulate = Color( 1, 1, 1, 0 )
 gravity = 1024.0
 
+[node name="Sprite" parent="AreaDeAtraccion" index="1"]
+position = Vector2( -17.759, -11.628 )
+rotation = -0.244346
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 5 )
 anims/rotacion_antihorario = SubResource( 6 )
@@ -180,7 +193,15 @@ position = Vector2( 250, 0 )
 
 [node name="Oeste" type="Position2D" parent="puntosSpawn"]
 position = Vector2( -250, 0 )
+
+[node name="RutaEnemigo" type="Path2D" parent="."]
+scale = Vector2( 1.4596, 1.58544 )
+curve = SubResource( 8 )
+script = ExtResource( 17 )
+
+[node name="TimerSpawnerEnemigos" type="Timer" parent="."]
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="timeout" from="TimerSpawnerEnemigos" to="." method="_on_TimerSpawnerEnemigos_timeout"]
 
 [editable path="AreaDeAtraccion"]
