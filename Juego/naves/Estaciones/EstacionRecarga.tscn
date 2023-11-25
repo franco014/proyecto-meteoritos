@@ -6,6 +6,8 @@
 [ext_resource path="res://Juego/naves/Estaciones/Vacio.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Juego/naves/Estaciones/recargando.ogg" type="AudioStream" id=5]
 
+
+
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 62.9908
 height = 146.882

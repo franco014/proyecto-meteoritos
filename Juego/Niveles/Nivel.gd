@@ -9,6 +9,7 @@ export var sector_meteoritos: PackedScene = null
 export var tiempo_transicion_camara: int = 1
 export var explosion_meteorito:PackedScene = null
 export var enemigo_interceptor:PackedScene = null
+export var rele_masa:PackedScene = null
 
 ##atributos Onready
 onready var contenedor_proyectiles:Node
@@ -21,12 +22,16 @@ onready var contenedor_enemigos:Node
 ##atributos 
 var meteoritos_totales:int = 0 
 var player:Player = null
+var numero_bases_enemigas = 0
 
 ## metodos
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	conectar_seniales()
 	crear_contenedores()
+	numero_bases_enemigas = contabilizar_bases_enemigas()
 	player = DatosJuego.get_player_actual()
+	
 
 ## motodos customs
 func conectar_seniales() -> void:
@@ -104,7 +109,20 @@ func controlar_meteoritos_restantes() ->void:
 			tiempo_transicion_camara * 0.10
 		)
 
+func contabilizar_bases_enemigas() -> int:
+	return $basesEnemigas.get_child_count()
 
+func crear_rele( ) -> void:
+	var new_rele_masa:ReleMasa = rele_masa.instance()
+	var pos_aleatoria:Vector2 = crear_posicion_aleatoria(400.0,200.0)
+	var margen:Vector2 = Vector2(600.0,600.0)
+	if pos_aleatoria.x < 0:
+		margen.x *= -1
+	if pos_aleatoria.y < 0:
+		margen.y *= -1
+	 
+	new_rele_masa.global_position = global_position + crear_posicion_aleatoria(1000.0,800.0)
+	add_child(new_rele_masa)
 
 func transicion_camaras(desde: Vector2,hasta: Vector2, Camara_actual:Camera2D,tiempo_transicion:float) -> void:
 	$TweenCamara.interpolate_property(
@@ -149,10 +167,15 @@ func _on_nave_destruida(nave:Player, posicion:Vector2, num_explosiones:int) -> v
 		add_child(new_explosion)
 		yield(get_tree().create_timer(0.6),"timeout")
 
-func _on_base_destruida(pos_partes: Array) -> void:
+func _on_base_destruida(_base, pos_partes: Array) -> void:
 	for posicion in pos_partes:
 		crear_explosion(posicion)
 		yield(get_tree().create_timer(0.5),"timeout")
+	
+	numero_bases_enemigas -= 1
+	if numero_bases_enemigas == 0:
+		crear_rele()
+
 
 
 func crear_explosion(

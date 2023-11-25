@@ -7,6 +7,7 @@ export var hitpoints: float = 30.0
 export var orbital:PackedScene = null
 export var numero_orbitales:int = 10 
 export var intervalo_spawn:float = 0.8
+export(Array,PackedScene) var rutas 
 
 ##atributos onready 
 onready var impacto_sfx: AudioStreamPlayer2D = $ImpactosSFX
@@ -15,11 +16,13 @@ onready var timer_spawner:Timer = $TimerSpawnerEnemigos
 ##atributos
 var esta_destruida:bool = false
 var posicion_spawn:Vector2 = Vector2.ZERO
+var ruta_seleccionada:Path2D
 
 ##metodos
 func _ready() -> void:
 	timer_spawner.wait_time = intervalo_spawn
 	$AnimationPlayer.play(elegir_animacion_aleatoria())
+	seleccionar_ruta()
 
 func _process(delta: float) -> void:
 	var player_objetivo:Player = DatosJuego.get_player_actual()
@@ -57,18 +60,24 @@ func destruir() -> void:
 		$Sprites/Sprite13.global_position,
 		$Sprites/Sprite14.global_position,
 	]
-	Eventos.emit_signal("base_destruida",self , posicion_partes)
+	Eventos.emit_signal("base_destruida",self,posicion_partes)
 	queue_free()
+
+func seleccionar_ruta() -> void:
+	randomize()
+	var indice_ruta:int = randi() % rutas.size() -1
+	ruta_seleccionada = rutas[indice_ruta].instance()
+	add_child(ruta_seleccionada)
 
 func spawnear_orbital() -> void:
 	numero_orbitales -= 1
-	$RutaEnemigo.global_position = global_position
+	ruta_seleccionada.global_position = global_position
 	
 	var new_orbital:EnemigoOrbital = orbital.instance()
 	new_orbital.crear(
 		global_position + posicion_spawn,
 		self,
-		$RutaEnemigo
+		ruta_seleccionada
 	)
 	Eventos.emit_signal("spawn_orbital",new_orbital)
 
@@ -83,24 +92,26 @@ func deteccion_cuadrante() -> Vector2:
 	
 	if abs(angulo_player) <= 45.0:
 		#player entra por la derecha
-		$RutaEnemigo.rotation_degrees = 180.0
+		ruta_seleccionada.rotation_degrees = 180.0
 		return$puntosSpawn/Este.position
 		#player entra por la izquierda
 	elif abs(angulo_player) > 135.0 and abs(angulo_player) <= 135.0:
-		$RutaEnemigo.rotation_degrees = 0.0
+		ruta_seleccionada.rotation_degrees = 0.0
 		return $puntosSpawn/Oeste.position
 		#player entra por arriba o por abajo 
 	elif abs(angulo_player) >  45.0 and abs(angulo_player) <= 135.0:
 		if sign(angulo_player) > 0:
 			#player entra por abajo
-			$RutaEnemigo.rotation_degrees = 270.0
+			ruta_seleccionada.rotation_degrees = 270.0
 			return $puntosSpawn/Sur.position
 		else:
 			#player entra por arriba
-			$RutaEnemigo.rotation_degrees = 90.0
+			ruta_seleccionada.rotation_degrees = 90.0
 			return $puntosSpawn/Norte.position
 			
 	return $puntosSpawn/Norte.position
+
+
  
 func elegir_animacion_aleatoria() -> String:
 	randomize()
