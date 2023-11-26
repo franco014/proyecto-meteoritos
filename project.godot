@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/laser/canion.gd"
 }, {
+"base": "NinePatchRect",
+"class": "ContenedorInformacion",
+"language": "GDScript",
+"path": "res://Juego/UI/HUD/ContenedorInformacion.gd"
+}, {
+"base": "ContenedorInformacion",
+"class": "ContenedorInformacionEnergia",
+"language": "GDScript",
+"path": "res://Juego/UI/HUD/ContenedorInformacionEnergia.gd"
+}, {
 "base": "NaveBase",
 "class": "EnemigoBase",
 "language": "GDScript",
@@ -49,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/naves/player/Escudo/Escudo.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "EstacionRecarga",
 "language": "GDScript",
 "path": "res://Juego/naves/Estaciones/EstacionRecarga.gd"
@@ -114,6 +124,8 @@ _global_script_class_icons={
 "CamaraJuego": "",
 "CameraPlayer": "",
 "Canion": "",
+"ContenedorInformacion": "",
+"ContenedorInformacionEnergia": "",
 "EnemigoBase": "",
 "EnemigoInterceptor": "",
 "EnemigoOrbital": "",

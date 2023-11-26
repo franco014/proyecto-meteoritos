@@ -31,11 +31,13 @@ func controlar_colisionador(esta_desactivado: bool) -> void:
 func controlar_energia(consumo:float) -> void:
 	energia += consumo
 	
-	print("energia escudo: ",energia)
 	if energia > energia_original:
 		energia = energia_original
 	elif energia <= 0.0:
+		Eventos.emit_signal("ocultar_energia_escudo")
 		desactivar()
+	
+	Eventos.emit_signal("cambio_energia_escudo",energia_original,energia)
 	
 func activar() -> void:
 	if energia <= 0.0:
