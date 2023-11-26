@@ -23,6 +23,7 @@ func atraer_jugador(body: Node) -> void:
 	
 	$Tween.start()
 
+
 ##señales internas
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":
@@ -38,4 +39,4 @@ func _on_Area2D_body_entered(body: Node) -> void:
 
 
 func _on_Tween_tween_all_completed() -> void:
-	print("sos un crack,¡¡pasaste de nivel!!!")
+	Eventos.emit_signal("nivel_completado")

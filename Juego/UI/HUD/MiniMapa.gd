@@ -46,8 +46,7 @@ func _ready() -> void:
 	set_process(false)
 	icono_player.position =zona_renderizada.rect_size * 0.5
 	escala_grilla = zona_renderizada.rect_size / (get_viewport_rect().size * escala_zoom)
-	Eventos.connect("nivel_iniciado",self,"_on_nivel_iniciado")
-	Eventos.connect("nave_destruida",self,"_on_nave_destruida")
+	conectar_seniales()
 
 func _process(delta: float) -> void:
 	if not Player:
