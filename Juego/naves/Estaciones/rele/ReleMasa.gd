@@ -5,6 +5,10 @@ extends Node2D
 onready var colisionador:CollisionShape2D = $Area2D/CollisionPolygon2D
 
 
+##metodos
+func _ready() -> void:
+	Eventos.emit_signal("minimapa_objeto_creado")
+
 ##metodos customs
 func atraer_jugador(body: Node) -> void:
 	$Tween.interpolate_property(

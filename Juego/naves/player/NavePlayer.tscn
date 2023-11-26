@@ -28,6 +28,7 @@ script = ExtResource( 10 )
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
+scale = Vector2( 1, 1 )
 z_index = 550
 texture = ExtResource( 9 )
 

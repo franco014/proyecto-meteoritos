@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Juego/naves/player/player_orange.png" type="Texture" id=1]
 [ext_resource path="res://Juego/UI/HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://Juego/UI/HUD/ContenedorInformacion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Juego/UI/HUD/ContenedorInformacionEnergia.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Juego/UI/HUD/MiniMapa.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade_in"
@@ -117,6 +118,13 @@ margin_left = -462.0
 margin_top = 186.0
 margin_right = 0.0
 margin_bottom = 358.0
+
+[node name="MiniMapa" parent="." instance=ExtResource( 5 )]
+margin_left = -144.0
+margin_top = -162.0
+margin_right = 144.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 288, 162 )
 
 [editable path="InfoMeteoritos"]
 

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-clockwork-tale-short.wav-b044ff40db198acb44429f4e6eb817aa.sample"
+
+[deps]
+
+source_file="res://Juego/Niveles/musicas/POL-clockwork-tale-short.wav"
+dest_files=[ "res://.import/POL-clockwork-tale-short.wav-b044ff40db198acb44429f4e6eb817aa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

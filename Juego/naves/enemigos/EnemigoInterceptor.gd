@@ -14,6 +14,7 @@ var potencia_actual: float = 0.0
 
 ##metodos
 func _ready() -> void:
+	Eventos.emit_signal("minimapa_objeto_creado")
 	$CollisionShape2D.set_deferred("disabled", false)
 
 
